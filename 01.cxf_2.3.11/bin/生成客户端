@@ -1,0 +1,1 @@
+D:\002.tools\apache-cxf-2.3.11\bin>wsdl2java.bat -client -p org.simonme.demo.cxf.client.user -d "D:\600.self\05.code\04.java\12. my_demo_github\demo\01.cxf_2.3.11\client" http://localhost:8085/ws/hello?wsdl

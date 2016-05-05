@@ -1,6 +1,6 @@
-package org.simonme.demo.cxf.role.service;
+package org.simonme.demo.cxf.server.service.role.service;
 
-import org.simonme.demo.cxf.role.bean.Role;
+import org.simonme.demo.cxf.server.service.role.bean.Role;
 
 public class RoleServiceImpl
 {
