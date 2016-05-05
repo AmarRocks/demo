@@ -51,8 +51,12 @@ public final class UserService_UserServicePort_Client {
         UserService port = ss.getUserServicePort();  
         
         Client client = ClientProxy.getClient(port);
-        client.getInInterceptors().add(new LoggingInInterceptor());
-        client.getInInterceptors().add(new LoggingOutInterceptor());
+        LoggingInInterceptor loginIn = new LoggingInInterceptor();
+        loginIn.setPrettyLogging(true);
+        client.getInInterceptors().add(loginIn);
+        LoggingOutInterceptor logOut = new LoggingOutInterceptor();
+        logOut.setPrettyLogging(true);
+        client.getOutInterceptors().add(logOut);
         
         HTTPConduit http = (HTTPConduit) client.getConduit(); 
         HTTPClientPolicy httpClientPolicy = http.getClient() ;
@@ -60,7 +64,7 @@ public final class UserService_UserServicePort_Client {
         {
             httpClientPolicy = new HTTPClientPolicy();
         }
-//        httpClientPolicy.setAllowChunking(false);
+        httpClientPolicy.setAllowChunking(false);
         http.setClient(httpClientPolicy);
         
         

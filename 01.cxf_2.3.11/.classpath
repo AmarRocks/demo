@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="server"/>
 	<classpathentry kind="src" path="client"/>
-	<classpathentry kind="lib" path="libs/cxf-2.3.11.jar"/>
+	<classpathentry kind="lib" path="libs/cxf-2.3.11.jar" sourcepath="/cxf2.3.1_src"/>
 	<classpathentry kind="lib" path="libs/cxf-manifest.jar"/>
 	<classpathentry kind="lib" path="libs/cxf-xjc-boolean-2.4.0.jar"/>
 	<classpathentry kind="lib" path="libs/cxf-xjc-bug671-2.4.0.jar"/>
