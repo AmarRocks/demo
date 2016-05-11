@@ -31,7 +31,7 @@ public class JaxWsServer
     {
         UserService userServiceImpl = new UserServiceImpl();  
         JaxWsServerFactoryBean factory = new JaxWsServerFactoryBean();  
-        factory.setAddress("http://localhost:8085/ws/hello");  
+        factory.setAddress("http://localhost:8085/efwkdemo/userservice");  
         factory.setServiceBean(userServiceImpl);  
         factory.setServiceClass(UserService.class);
 //        //LoggingInInterceptor和LoggingOutInterceptor是日志拦截器，用于输入和输出时显示日志  
