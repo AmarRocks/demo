@@ -4,7 +4,7 @@
 	<classpathentry kind="lib" path="libs/org.springframework.beans-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="libs/org.springframework.context-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_71"/>
-	<classpathentry kind="lib" path="libs/org.springframework.core-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="libs/org.springframework.core-3.0.5.RELEASE.jar" sourcepath="D:/004.work/811.fwk_refactor/03.code/150810_yiyisvn/01.code/trunk/05.opensource_jar_source_doc/spring-core-3.0.5.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="libs/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="libs/org.springframework.asm-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="libs/org.springframework.expression-3.0.5.RELEASE.jar"/>
