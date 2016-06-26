@@ -11,4 +11,9 @@
 	<bean id="serviceB" class="org.simonme.srcstudy.spring3.demo.service.impl.ServiceBImpl">
 		<property name="field" value="field4BInstacne"/>
 	</bean>
+	
+	<bean id="resourceServiceImpl" class="org.simonme.srcstudy.spring3.demo.service.impl.ResourceServiceImpl">
+		<property name="configLocation" value="classpath:conf/test/test.xml"/>
+	</bean>
+	
 </beans>

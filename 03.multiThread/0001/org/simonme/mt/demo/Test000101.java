@@ -88,7 +88,7 @@ public class Test000101
     {
         try
         {
-            Thread.sleep(2 * 1000l);
+            Thread.sleep(2000 * 1000l);
         }
         catch (InterruptedException e)
         {
