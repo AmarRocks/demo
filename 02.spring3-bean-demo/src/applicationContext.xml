@@ -4,8 +4,53 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 	default-autowire="byName" default-lazy-init="false">
 	
+<!-- 	<bean id="propertyConfigurer" -->
+<!-- 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!-- 		<property name="locations"> -->
+<!-- 			<list> -->
+<!-- 				<value> -->
+<!-- 					classpath:conf/test/test1.properties -->
+<!-- 				</value> -->
+<!-- 				<value> -->
+<!-- 					classpath:conf/test/test2.properties -->
+<!-- 				</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
+	<!-- 20160707 在spring中使用PropertyPlaceholderConfigurer时，默认情况下只能装配一个实例。 -->
+	<!-- 如果使用了多个，会出现key不能resolve的异常 -->
+	<!-- 但是有个办法能使用多个，就是将其ignoreUnresolvablePlaceholders的属性设置成true，即可忽略检查 -->
+	<!-- 关键细节代码在：AbstractApplicationContext.invokeBeanFactoryPostProcessors(Collection<? extends BeanFactoryPostProcessor>, ConfigurableListableBeanFactory) -->
+	<!-- 一个PropertyPlaceholderConfigurer实例算一个BeanFactoryPostProcessor -->
+	<!-- 在后置处理过程中便会去解析占位key -->
+	<bean id="propertyConfigurer1"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+<!-- 		<property name="ignoreUnresolvablePlaceholders" value="true"/> -->
+		<property name="locations">
+			<list>
+				<value>
+					classpath:conf/test/test1.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+	
+<!-- 	<bean id="propertyConfigurer2" -->
+<!-- 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!-- 		<property name="locations"> -->
+<!-- 			<list> -->
+<!-- 				<value> -->
+<!-- 					classpath:conf/test/test2.properties -->
+<!-- 				</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
 	<bean id="serviceA" class="org.simonme.srcstudy.spring3.demo.service.impl.ServiceAImpl">
 		<property name="field" value="field4AInstacne"/>
+		<property name="key1" value="${key1}"/>
+		<property name="key2" value="${key2}"/>
 	</bean>
 	
 	<bean id="serviceB" class="org.simonme.srcstudy.spring3.demo.service.impl.ServiceBImpl">

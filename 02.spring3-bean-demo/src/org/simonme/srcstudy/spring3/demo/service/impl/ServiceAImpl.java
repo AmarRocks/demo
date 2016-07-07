@@ -23,6 +23,10 @@ public class ServiceAImpl implements ServiceA
     
     private String field;
     
+    private String key1;
+    
+    private String key2;
+    
     /**
      * 模拟返回测试数据
      * @return
@@ -30,6 +34,8 @@ public class ServiceAImpl implements ServiceA
     @Override
     public String queryA()
     {
+        System.out.println("key1:" + key1);
+        System.out.println("key2:" + key2);
         return "Query A Result" + field;
     }
 
@@ -42,7 +48,24 @@ public class ServiceAImpl implements ServiceA
     {
         this.field = field;
     }
-    
-    
-    
+
+    public String getKey1()
+    {
+        return key1;
+    }
+
+    public void setKey1(String key1)
+    {
+        this.key1 = key1;
+    }
+
+    public String getKey2()
+    {
+        return key2;
+    }
+
+    public void setKey2(String key2)
+    {
+        this.key2 = key2;
+    }
 }
