@@ -7,14 +7,10 @@
  */
 package org.simonme.demo.netty3.telnet;
 
-import java.nio.charset.Charset;
-
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
-import org.jboss.netty.handler.codec.frame.DelimiterBasedFrameDecoder;
-import org.jboss.netty.handler.codec.frame.Delimiters;
-import org.jboss.netty.handler.codec.string.StringDecoder;
+import org.jboss.netty.handler.codec.frame.FixedLengthFrameDecoder;
 
 /**
  * <一句话功能简述>
@@ -47,9 +43,10 @@ public class TelnetChannelPipelineFactory implements ChannelPipelineFactory
         throws Exception
     {
         ChannelPipeline pipeline = Channels.pipeline();
-        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(C_8192, Delimiters.lineDelimiter()));
-        pipeline.addLast("decoder", new StringDecoder(Charset.forName("UTF-8")));
-        pipeline.addLast("encoder", new StringDecoder(Charset.forName("UTF-8")));
+//        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(C_8192, Delimiters.lineDelimiter()));
+        pipeline.addLast("framer", new FixedLengthFrameDecoder(1));
+//        pipeline.addLast("decoder", new StringDecoder(Charset.forName("UTF-8")));
+//        pipeline.addLast("encoder", new StringDecoder(Charset.forName("UTF-8")));
         pipeline.addLast("handler", telnethandler);
         return pipeline;
     }
