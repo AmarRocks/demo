@@ -7,8 +7,8 @@
  */
 package org.simonme.demo.netty3.telnet;
 
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,14 +42,22 @@ public class TelnetHandler extends SimpleChannelUpstreamHandler
     
     private static byte[] DOWN = new byte[]{(byte)27,(byte)91, (byte)66};
     
+    private static byte[] LEFT = new byte[]{(byte)27,(byte)91, (byte)66};
+    
+    private static byte[] RIGHT = new byte[]{(byte)27,(byte)91, (byte)66};
+    
+    private static byte[] FIRST_RESP = new byte[]{(byte)-3, (byte)3};
+    
     private static byte[] ENTER1 = new byte[]{(byte)'\r'};
     
     private static byte[] ENTER2 = new byte[]{(byte)'\n'};
     
+    private static String p = "P>";
+    
     private Map<String, ITelnetCommandHandler> command2Handler = new HashMap();
     
-    private Map<Integer, ByteBuffer> channelId2Buffer = new ConcurrentHashMap<Integer, ByteBuffer>();
-
+    private Map<Integer, InputByteBuffer> channelId2Buffer = new ConcurrentHashMap<Integer, InputByteBuffer>();
+    
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e)
         throws Exception
@@ -62,88 +70,122 @@ public class TelnetHandler extends SimpleChannelUpstreamHandler
         throws Exception
     {
         Object message = e.getMessage();
-//        String msg = handleCommand(message, e.getChannel());
-//        byte[] bytes = msg.getBytes("utf-8");
-//        ChannelBuffer buffer = ChannelBuffers.buffer(bytes.length);
-//		buffer.writeBytes(bytes);
-//        e.getChannel().write(buffer);
         if (message instanceof BigEndianHeapChannelBuffer)
         {
             BigEndianHeapChannelBuffer heapByteBuffer = (BigEndianHeapChannelBuffer)message;
             byte[] receivedBytes = heapByteBuffer.array();
-            appendByteToBuffer(ctx.getChannel().getId(), receivedBytes);
-            System.out.println("received:" + receivedBytes[0]);
+            appendByteToBuffer(ctx.getChannel().getId(), receivedBytes, ctx.getChannel());
             ctx.getChannel().getId();
         }
         System.out.println("received:" + message);
     }
 
-    private synchronized void appendByteToBuffer(Integer id, byte[] receivedBytes)
+    private synchronized void appendByteToBuffer(Integer id, byte[] receivedBytes, Channel channel)
     {
         if (id == null || receivedBytes == null || receivedBytes.length == 0)
         {
             return;
         }
-        ByteBuffer existBuffer = channelId2Buffer.get(id);
+        InputByteBuffer existBuffer = channelId2Buffer.get(id);
         if(existBuffer == null)
         {
-            existBuffer = ByteBuffer.allocate(32);
+            existBuffer = new InputByteBuffer();
             channelId2Buffer.put(id, existBuffer);
         }
-        
-        /**
-         * 判断是否需要对buffer扩容 然后塞入接收到的byte
-         */
-        if (existBuffer.remaining() < receivedBytes.length)
+        for (byte b : receivedBytes)
         {
-            //  扩32个长度
-            int newCapacity = existBuffer.capacity() + 32;
-            ByteBuffer temp = ByteBuffer.allocate(newCapacity);
-            existBuffer.flip();
-            temp.put(existBuffer);
-            existBuffer = temp;
+            System.out.println(b);
+            
+            // 心跳包 忽略
+            if (b == (byte)-1 || b == (byte)-15)
+            {
+                continue;
+            }
+            existBuffer.append(b);
         }
-        existBuffer.put(receivedBytes);
-        if (endsWith(existBuffer, UP))
+        if (existBuffer.endsWith(UP))
         {
-            System.out.println("handle command up");
+            existBuffer.clear();
+            
+            // 将上一条命令写入buffer
         }
-        if (endsWith(existBuffer, DOWN))
+        if (existBuffer.endsWith(DOWN))
         {
-            System.out.println("handle command DOWN");
+            existBuffer.clear();
+            // 将下一条命令写入buffer
         }
-        if (endsWith(existBuffer, ENTER1))
+        if (existBuffer.endsWith(LEFT))
         {
-            System.out.println("handle command ENTER1");
+            existBuffer.removeFromCurrentToLeft(3);
+            existBuffer.moveCursorToLeft();
+            existBuffer.clear();
+            return;
         }
-        if (endsWith(existBuffer, ENTER2))
+        if (existBuffer.endsWith(RIGHT))
         {
-            System.out.println("handle command ENTER2");
+            existBuffer.removeFromCurrentToLeft(3);
+            existBuffer.moveCursorToRight();
+            existBuffer.clear();
+            return;
         }
-        
-    }
-    
-    private boolean endsWith(ByteBuffer existBuffer, byte[] target)
-    {
-        if (existBuffer == null || target == null || target.length == 0)
+        if (existBuffer.endsWith(ENTER1))
         {
-            return false;
+            handleEnter(channel, existBuffer);
+            return;
         }
-        if(existBuffer.capacity() - existBuffer.remaining() < target.length)
+        if (existBuffer.endsWith(ENTER2))
         {
-            return false;
+            handleEnter(channel, existBuffer);
+            return;
         }
-        int targetLength = target.length;
-        for (int i = targetLength - 1; i >= 0; i--)
+        if (existBuffer.endsWith(FIRST_RESP))
         {
-             if (existBuffer.get(i) == null || existBuffer.get(i) != target[i])
-             {
-                 return false;
-             }
+            existBuffer.clear();
+            
+            // 将上一条命令写入buffer
+            StringBuffer msgSb = new StringBuffer();
+            msgSb.append("   ***                                                                       \r\n");
+            msgSb.append("  ** **                          sssssK  ssssss              ss              \r\n");
+            msgSb.append(" **   **                         s       ss                  ss              \r\n");
+            msgSb.append(" **   **         ****            s       ss     f,   ff   ff ss   ff         \r\n");
+            msgSb.append(" **   **       **   ****         s       ss     ss   ss   s: ss  ss          \r\n");
+            msgSb.append(" **  **       *   **   **        sssss   ssssss  s   ss   s  ss ss           \r\n");
+            msgSb.append("  **  *      *  **  ***  **      stttt   ssssss  s  sjsK :s  ssss            \r\n");
+            msgSb.append("   **  *    *  **     **  *      s       ss      ss s  s sE  sss             \r\n");
+            msgSb.append("    ** **  ** **        **       s       ss      fs s  s s   ssts            \r\n");
+            msgSb.append("    **   **  **                  s       ss       sEs  s s   ss Ws           \r\n");
+            msgSb.append("   *           *                 ssssss  ss       ss   Dss   ss  ss          \r\n");
+            msgSb.append("  *             *                ssssss  ss       ss    s    ss   ss         \r\n");
+            msgSb.append(" *    0     0    *                                                           \r\n");
+            msgSb.append(" *   /   @   \\   *                                                           \r\n");
+            msgSb.append(" *   \\__/ \\__/   *                                                           \r\n");
+            msgSb.append("   *     W     *                                                             \r\n");
+            msgSb.append("     **     **                                                               \r\n");
+            msgSb.append("====================== Welcome to console!======================\r\n");
+            msgSb.append(ITelnetCommandHandler.PROMPT);
+            ChannelBuffer buffer = ChannelBuffers.buffer(msgSb.length());
+            buffer.writeBytes(msgSb.toString().getBytes());
+            existBuffer.append(ITelnetCommandHandler.PROMPT.getBytes());
+            channel.write(buffer);
+            return;
         }
-        return true;
+        byte[] toWrite = existBuffer.toCommandBytes();
+        ChannelBuffer buffer = ChannelBuffers.buffer(1);
+        buffer.writeByte(toWrite[toWrite.length - 1]);
+        channel.write(buffer);
     }
 
+    private void handleEnter(Channel channel, InputByteBuffer existBuffer)
+    {
+        existBuffer.clear();
+        existBuffer.append(ITelnetCommandHandler.PROMPT.getBytes());
+        byte[] toWrite = existBuffer.toCommandBytes();
+        ChannelBuffer buffer = ChannelBuffers.buffer(toWrite.length);
+        buffer.writeBytes(toWrite);
+        existBuffer.append(ITelnetCommandHandler.PROMPT.getBytes());
+        channel.write(buffer);
+    }
+    
     /** <一句话功能简述>
      * <功能详细描述>
      * @param message
@@ -198,28 +240,8 @@ public class TelnetHandler extends SimpleChannelUpstreamHandler
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e)
         throws Exception
     {
-        StringBuffer msgSb = new StringBuffer();
-        msgSb.append("   ***                                                                       \r\n");
-        msgSb.append("  ** **                          sssssK  ssssss              ss              \r\n");
-        msgSb.append(" **   **                         s       ss                  ss              \r\n");
-        msgSb.append(" **   **         ****            s       ss     f,   ff   ff ss   ff         \r\n");
-        msgSb.append(" **   **       **   ****         s       ss     ss   ss   s: ss  ss          \r\n");
-        msgSb.append(" **  **       *   **   **        sssss   ssssss  s   ss   s  ss ss           \r\n");
-        msgSb.append("  **  *      *  **  ***  **      stttt   ssssss  s  sjsK :s  ssss            \r\n");
-        msgSb.append("   **  *    *  **     **  *      s       ss      ss s  s sE  sss             \r\n");
-        msgSb.append("    ** **  ** **        **       s       ss      fs s  s s   ssts            \r\n");
-        msgSb.append("    **   **  **                  s       ss       sEs  s s   ss Ws           \r\n");
-        msgSb.append("   *           *                 ssssss  ss       ss   Dss   ss  ss          \r\n");
-        msgSb.append("  *             *                ssssss  ss       ss    s    ss   ss         \r\n");
-        msgSb.append(" *    0     0    *                                                           \r\n");
-        msgSb.append(" *   /   @   \\   *                                                           \r\n");
-        msgSb.append(" *   \\__/ \\__/   *                                                           \r\n");
-        msgSb.append("   *     W     *                                                             \r\n");
-        msgSb.append("     **     **                                                               \r\n");
-        msgSb.append("====================== Welcome to console!======================\r\n");
-        msgSb.append(ITelnetCommandHandler.PROMPT);
-        ChannelBuffer buffer = ChannelBuffers.buffer(msgSb.length());
-        //buffer.writeBytes(msgSb.toString().getBytes());
+        
+        ChannelBuffer buffer = ChannelBuffers.buffer(3);
         byte[] bytes = {(byte)255, (byte)251, (byte)3};
         buffer.writeBytes(bytes);
         e.getChannel().write(buffer);
@@ -234,6 +256,239 @@ public class TelnetHandler extends SimpleChannelUpstreamHandler
 			Map<String, ITelnetCommandHandler> command2Handler) 
 	{
 		this.command2Handler = command2Handler;
+	}
+	
+	public static class ByteBufferNode
+	{
+	    private byte buffer;
+	    
+	    private ByteBufferNode next;
+	    
+	    private ByteBufferNode previous;
+
+        public byte getBuffer()
+        {
+            return buffer;
+        }
+
+        public void setBuffer(byte buffer)
+        {
+            this.buffer = buffer;
+        }
+
+        public ByteBufferNode getNext()
+        {
+            return next;
+        }
+
+        public void setNext(ByteBufferNode next)
+        {
+            this.next = next;
+        }
+
+        public ByteBufferNode getPrevious()
+        {
+            return previous;
+        }
+
+        public void setPrevious(ByteBufferNode previous)
+        {
+            this.previous = previous;
+        }
+	}
+	
+	public static class InputByteBuffer
+	{
+	    
+	    private ByteBufferNode header;
+	    
+	    private ByteBufferNode current;
+	    
+	    public void clear()
+	    {
+	        current = null;
+	        header = null;
+	    }
+	    
+	    public void moveCursorToLeft()
+	    {
+	        if(current.previous != null)
+	        {
+	            current = current.previous;
+	        }
+	    }
+	    
+	    public void moveCursorToRight()
+	    {
+	        if (current.next != null)
+	        {
+	            current = current.next;
+	        }
+	    }
+	    
+	    public void append(byte b)
+	    {
+	        if (current == null)
+	        {
+	            if (header == null)
+	            {
+	                header = new ByteBufferNode();
+	            }
+	            current = header;
+	            current.setBuffer(b);
+	        }
+	        else
+	        {
+	            ByteBufferNode next = new ByteBufferNode();
+	            next.setBuffer(b);
+	            current.next = next;
+	            next.previous = current;
+	            current = next;
+	        }
+	    }
+	    
+	    public void append(byte[] bytes)
+        {
+            if (bytes == null)
+            {
+                return;
+            }
+            for (byte b : bytes)
+            {
+                append(b);
+            }
+        }
+	    
+	    public boolean endsWith(byte[] bytes)
+	    {
+	        ByteBufferNode tail = findTail();
+	        if (tail == null)
+	        {
+	            return false;
+	        }
+	        ByteBufferNode cursorNode = tail;
+	        int length = bytes.length;
+	        for (int i = length - 1; i >= 0; i--)
+	        {
+	            if (cursorNode == null || cursorNode.getBuffer() != bytes[i])
+	            {
+	                return false;
+	            }
+	            cursorNode = cursorNode.previous;
+	        }
+	        return true;
+	    }
+	    
+	    public ByteBufferNode findTail()
+	    {
+	        if (current == null)
+	        {
+	            return null;
+	        }
+	        ByteBufferNode temp = current;
+	        while (temp != null && temp.next != null)
+	        {
+	            temp = temp.next;
+	        }
+	        return temp;
+	    }
+	    
+	    public void removeFromCurrentToLeft(int count)
+	    {
+	        int countToLeft = countToLeft();
+	        if (countToLeft < count)
+	        {
+	            throw new IllegalArgumentException("向左向移除的个数比到左向还剩的个数多。" + count + "," + countToLeft);
+	        }
+	        
+	        for (int i = 0; i < count; i++)
+	        {
+	            ByteBufferNode oldPrevious = current.previous;
+	            ByteBufferNode oldNext = current.next;
+	            oldPrevious.next = oldNext;
+	            if (oldNext != null)
+	            {
+	                oldNext.previous = oldPrevious;
+	            }
+	            current.previous = null;
+	            current.next = null;
+	            current = oldPrevious;
+	        }
+	    }
+	    
+	    public int countToLeft()
+	    {
+	        int count = 0;
+	        ByteBufferNode temp = current;
+	        while (temp != null)
+	        {
+	            count = count + 1;
+	            temp = temp.previous;
+	        }
+	        return count;
+	    }
+	    
+	    public int count()
+        {
+            int count = 0;
+            ByteBufferNode temp = findTail();
+            while (temp != null)
+            {
+                count = count + 1;
+                temp = temp.previous;
+            }
+            return count;
+        }
+	    
+	    public byte[] toCommandBytes()
+        {
+            int count = count();
+            byte[] bytes = new byte[count];
+            ByteBufferNode temp = header;
+            int i = 0;
+            while (temp != null)
+            {
+                bytes[i] = temp.getBuffer();
+                temp = temp.next;
+                i++;
+            }
+            return bytes;
+        }
+	    
+	    public String toCommandString()
+	    {
+	        String s = null;
+	        try
+            {
+                s = new String (toCommandBytes(), "utf-8");
+            }
+            catch (UnsupportedEncodingException e)
+            {
+                e.printStackTrace();
+            }
+	        return s;
+	    }
+	    
+        public ByteBufferNode getHeader()
+        {
+            return header;
+        }
+
+        public void setHeader(ByteBufferNode header)
+        {
+            this.header = header;
+        }
+
+        public ByteBufferNode getCurrent()
+        {
+            return current;
+        }
+
+        public void setCurrent(ByteBufferNode current)
+        {
+            this.current = current;
+        }
+	    
 	}
     
 }

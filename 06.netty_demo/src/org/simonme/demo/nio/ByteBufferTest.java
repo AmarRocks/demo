@@ -47,6 +47,7 @@ public class ByteBufferTest
         byteBuffer.put((byte)'d');// 写完之后，bytbuffer变成100, 98, 99,  也就是position在哪，buffer就在哪写入
         byteBuffer.put((byte)'e');
         byteBuffer.put((byte)'f');// 写完之后，bytbuffer变成 100, 101, 102 也就是会覆盖之前存在的值
+        System.out.println(byteBuffer.remaining());// 1 remianing是limit和position的差值
         byteBuffer.put((byte)'g');
         byteBuffer.put((byte)'h');// 超过limit限制虽然还没达到capacity，也会出异常：java.nio.BufferOverflowException
         
