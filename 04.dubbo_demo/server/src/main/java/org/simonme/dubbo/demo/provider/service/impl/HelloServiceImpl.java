@@ -24,6 +24,11 @@ import org.simonme.dubbo.demo.provider.service.HelloService;
  */
 public class HelloServiceImpl implements HelloService
 {
+    
+    public HelloServiceImpl()
+    {
+        System.out.println("---c---");
+    }
 
     @Override
     public void sayHello(String name)

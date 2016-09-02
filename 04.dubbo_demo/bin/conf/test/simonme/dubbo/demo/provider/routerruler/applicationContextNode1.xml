@@ -2,18 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd 
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 	default-lazy-init="true">
 
 	<description>dubbo demo srv2 配置</description>
-
-    <!-- 用这种写法  需要 xsi:schemaLocation指向正确版本的xsd 一开始 指向了3.2的就错了 -->
-	<context:property-placeholder location="classpath:conf/test/simonme/dubbo/demo/provider/provider.properties"/>
 	<dubbo:application name="hello-world-app"/>
+	<context:property-placeholder location="classpath:conf/test/simonme/dubbo/demo/provider/provider.properties"/>
+	
+	<!-- 如果有监控接在注册中心上 那么能自动发现 -->
+    <dubbo:monitor protocol="registry" />
 	<dubbo:registry protocol="zookeeper" address="${zookeeper_rigister_center}" />
-	<dubbo:monitor protocol="registry" />
     <dubbo:protocol name="dubbo" port="20880"/>
     <dubbo:service interface="org.simonme.dubbo.demo.provider.service.HelloService" ref="m00001.app001.xx.helloService"/>
     <bean id="m00001.app001.xx.helloService" class="org.simonme.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
