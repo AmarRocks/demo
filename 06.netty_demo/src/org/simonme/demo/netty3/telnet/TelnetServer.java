@@ -28,7 +28,7 @@ public class TelnetServer
     /**
      * EFwk服务默认端口号
      */
-    private static final int PORT = 8823;
+    private static final int PORT = 23;
     
     /**
      * 线程数为2， telnet管理服务线程不需太多
@@ -76,7 +76,6 @@ public class TelnetServer
     {
         TelnetServer telnetServer = new TelnetServer();
         telnetServer.boot();
-        
     }
 
 }

@@ -42,7 +42,8 @@ public class TelnetChannelPipelineFactory implements ChannelPipelineFactory
     public ChannelPipeline getPipeline()
         throws Exception
     {
-        ChannelPipeline pipeline = Channels.pipeline();
+        TelnetChannelPipeline pipeline = new TelnetChannelPipeline();
+        pipeline.setTelnetHandler(telnethandler);
 //        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(C_8192, Delimiters.lineDelimiter()));
         pipeline.addLast("framer", new FixedLengthFrameDecoder(1));
 //        pipeline.addLast("decoder", new StringDecoder(Charset.forName("UTF-8")));
