@@ -14,6 +14,6 @@
 	
 	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
     <dubbo:reference id="helloService" interface="org.simonme.dubbo.demo.provider.service.HelloService"/>
-	
+	<dubbo:reference id="userService" interface="org.simonme.dubbo.demo.provider.service.UserService"/>
 	
 </beans>

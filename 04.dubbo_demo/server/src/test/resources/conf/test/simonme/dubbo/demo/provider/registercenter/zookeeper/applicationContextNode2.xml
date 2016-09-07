@@ -12,6 +12,4 @@
 	<dubbo:application name="hello-world-app"/>
 	<dubbo:registry protocol="zookeeper" address="${zookeeper_rigister_center}" />
     <dubbo:protocol name="dubbo" port="20890"/>
-    <dubbo:service interface="org.simonme.dubbo.demo.provider.service.HelloService" ref="m00001.app001.xx.helloService"/>
-    <bean id="m00001.app001.xx.helloService" class="org.simonme.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
 </beans>

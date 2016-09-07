@@ -7,11 +7,9 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 	default-lazy-init="true">
 
-	<description>dubbo demo srv2 配置</description>
+	<description>dubbo demo srv3 配置</description>
 	<dubbo:application name="hello-world-app"/>
 	<context:property-placeholder location="classpath:conf/test/simonme/dubbo/demo/provider/provider.properties"/>
 	<dubbo:registry protocol="zookeeper" address="${zookeeper_rigister_center}" />
     <dubbo:protocol name="dubbo" port="20900"/>
-    <dubbo:service interface="org.simonme.dubbo.demo.provider.service.HelloService" ref="m00001.app001.xx.helloService"/>
-    <bean id="m00001.app001.xx.helloService" class="org.simonme.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
 </beans>

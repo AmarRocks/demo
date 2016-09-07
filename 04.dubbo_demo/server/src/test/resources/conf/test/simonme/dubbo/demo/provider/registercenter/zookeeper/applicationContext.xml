@@ -6,14 +6,11 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 	default-lazy-init="true">
-	<description>dubbo demo配置</description>
 
-	<dubbo:application name="consumer-of-helloworld-app"  />
-	<context:property-placeholder location="classpath:conf/test/simonme/dubbo/demo/consumer/provider.properties"/>
-	<dubbo:registry protocol="zookeeper" address="${zookeeper_rigister_center}" />
+	<description>dubbo demo bean 配置</description>
 	
-	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
-    <dubbo:reference id="helloService" interface="org.simonme.dubbo.demo.provider.service.HelloService"/>
-	<dubbo:reference id="userService" interface="org.simonme.dubbo.demo.provider.service.UserService"/>
-	
+    <dubbo:service interface="org.simonme.dubbo.demo.provider.service.HelloService" ref="m00001.app001.xx.helloService"/>
+    <dubbo:service interface="org.simonme.dubbo.demo.provider.service.UserService" ref="m00001.app001.xx.userService" timeout="600000"/>
+    <bean id="m00001.app001.xx.helloService" class="org.simonme.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
+    <bean id="m00001.app001.xx.userService" class="org.simonme.dubbo.demo.provider.service.impl.UserServiceImpl"/>
 </beans>

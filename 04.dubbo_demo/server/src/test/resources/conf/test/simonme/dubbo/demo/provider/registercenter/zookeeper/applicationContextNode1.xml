@@ -7,7 +7,9 @@
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
 	default-lazy-init="true">
 
-	<description>dubbo demo srv2 配置</description>
+	<description>dubbo demo srv1 配置</description>
+	
+	<import resource="classpath:conf/test/simonme/dubbo/demo/provider/registercenter/zookeeper/applicationContext.xml" />
 
     <!-- 用这种写法  需要 xsi:schemaLocation指向正确版本的xsd 一开始 指向了3.2的就错了 -->
 	<context:property-placeholder location="classpath:conf/test/simonme/dubbo/demo/provider/provider.properties"/>
@@ -15,6 +17,4 @@
 	<dubbo:registry protocol="zookeeper" address="${zookeeper_rigister_center}" />
 	<dubbo:monitor protocol="registry" />
     <dubbo:protocol name="dubbo" port="20880"/>
-    <dubbo:service interface="org.simonme.dubbo.demo.provider.service.HelloService" ref="m00001.app001.xx.helloService"/>
-    <bean id="m00001.app001.xx.helloService" class="org.simonme.dubbo.demo.provider.service.impl.HelloServiceImpl"/>
 </beans>
