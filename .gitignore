@@ -14,3 +14,6 @@ hs_err_pid*
 
 #mac osx
 .DS_Store
+
+07.ElasticSearch_demo/elasticsearch-2.4.0/data/**
+07.ElasticSearch_demo/elasticsearch-2.4.0/logs/

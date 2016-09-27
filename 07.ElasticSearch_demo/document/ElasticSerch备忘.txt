@@ -1,0 +1,148 @@
+{
+"name": "Sharon Carter"
+"cluster_name": "elasticsearch"
+"version": {
+"number": "2.4.0"
+"build_hash": "ce9f0c7394dee074091dd1bc4e9469251181fc55"
+"build_timestamp": "2016-08-29T09:14:17Z"
+"build_snapshot": false
+"lucene_version": "5.5.2"
+}-
+"tagline": "You Know, for Search"
+}
+
+{
+"name": "Alyssa Moy"
+"cluster_name": "elasticsearch"
+"version": {
+"number": "2.4.0"
+"build_hash": "ce9f0c7394dee074091dd1bc4e9469251181fc55"
+"build_timestamp": "2016-08-29T09:14:17Z"
+"build_snapshot": false
+"lucene_version": "5.5.2"
+}-
+"tagline": "You Know, for Search"
+}
+
+
+
+Daemon Thread [elasticsearch[Alyssa Moy][http_server_worker][T#6]{New I/O worker #24}] (Suspended (breakpoint at line 69 in org.elasticsearch.action.search.TransportSearchAction))	
+	org.elasticsearch.action.search.TransportSearchAction.doExecute(org.elasticsearch.action.search.SearchRequest, org.elasticsearch.action.ActionListener<org.elasticsearch.action.search.SearchResponse>) line: 69	
+	org.elasticsearch.action.search.TransportSearchAction.doExecute(org.elasticsearch.action.ActionRequest, org.elasticsearch.action.ActionListener) line: 47	
+	org.elasticsearch.action.search.TransportSearchAction(org.elasticsearch.action.support.TransportAction<Request,Response>).doExecute(org.elasticsearch.tasks.Task, Request, org.elasticsearch.action.ActionListener<Response>) line: 149	
+	org.elasticsearch.action.search.TransportSearchAction(org.elasticsearch.action.support.TransportAction<Request,Response>).execute(org.elasticsearch.tasks.Task, Request, org.elasticsearch.action.ActionListener<Response>) line: 137	
+	org.elasticsearch.action.search.TransportSearchAction(org.elasticsearch.action.support.TransportAction<Request,Response>).execute(Request, org.elasticsearch.action.ActionListener<Response>) line: 85	
+	org.elasticsearch.client.node.NodeClient.doExecute(org.elasticsearch.action.Action<Request,Response,RequestBuilder>, Request, org.elasticsearch.action.ActionListener<Response>) line: 58	
+	org.elasticsearch.client.node.NodeClient(org.elasticsearch.client.support.AbstractClient).execute(org.elasticsearch.action.Action<Request,Response,RequestBuilder>, Request, org.elasticsearch.action.ActionListener<Response>) line: 359	
+	org.elasticsearch.rest.BaseRestHandler$HeadersAndContextCopyClient(org.elasticsearch.client.FilterClient).doExecute(org.elasticsearch.action.Action<Request,Response,RequestBuilder>, Request, org.elasticsearch.action.ActionListener<Response>) line: 52	
+	org.elasticsearch.rest.BaseRestHandler$HeadersAndContextCopyClient.doExecute(org.elasticsearch.action.Action<Request,Response,RequestBuilder>, Request, org.elasticsearch.action.ActionListener<Response>) line: 88	
+	org.elasticsearch.rest.BaseRestHandler$HeadersAndContextCopyClient(org.elasticsearch.client.support.AbstractClient).execute(org.elasticsearch.action.Action<Request,Response,RequestBuilder>, Request, org.elasticsearch.action.ActionListener<Response>) line: 359	
+	org.elasticsearch.rest.BaseRestHandler$HeadersAndContextCopyClient(org.elasticsearch.client.support.AbstractClient).search(org.elasticsearch.action.search.SearchRequest, org.elasticsearch.action.ActionListener<org.elasticsearch.action.search.SearchResponse>) line: 582	
+	org.elasticsearch.rest.action.search.RestSearchAction.handleRequest(org.elasticsearch.rest.RestRequest, org.elasticsearch.rest.RestChannel, org.elasticsearch.client.Client) line: 85	
+	org.elasticsearch.rest.action.search.RestSearchAction(org.elasticsearch.rest.BaseRestHandler).handleRequest(org.elasticsearch.rest.RestRequest, org.elasticsearch.rest.RestChannel) line: 54	
+	org.elasticsearch.rest.RestController.executeHandler(org.elasticsearch.rest.RestRequest, org.elasticsearch.rest.RestChannel) line: 198	
+	org.elasticsearch.rest.RestController.dispatchRequest(org.elasticsearch.rest.RestRequest, org.elasticsearch.rest.RestChannel) line: 158	
+	org.elasticsearch.http.HttpServer.internalDispatchRequest(org.elasticsearch.rest.RestRequest, org.elasticsearch.rest.RestChannel) line: 153	
+	org.elasticsearch.http.HttpServer$Dispatcher.dispatchRequest(org.elasticsearch.rest.RestRequest, org.elasticsearch.rest.RestChannel) line: 101	
+	org.elasticsearch.http.netty.NettyHttpServerTransport.dispatchRequest(org.elasticsearch.rest.RestRequest, org.elasticsearch.rest.RestChannel) line: 451	
+	org.elasticsearch.http.netty.HttpRequestHandler.messageReceived(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.MessageEvent) line: 61	
+	org.elasticsearch.http.netty.HttpRequestHandler(org.jboss.netty.channel.SimpleChannelUpstreamHandler).handleUpstream(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 70	
+	org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 564	
+	org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(org.jboss.netty.channel.ChannelEvent) line: 791	
+	org.elasticsearch.http.netty.pipelining.HttpPipeliningHandler.messageReceived(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.MessageEvent) line: 60	
+	org.elasticsearch.http.netty.pipelining.HttpPipeliningHandler(org.jboss.netty.channel.SimpleChannelHandler).handleUpstream(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 88	
+	org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 564	
+	org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(org.jboss.netty.channel.ChannelEvent) line: 791	
+	org.jboss.netty.handler.codec.http.HttpChunkAggregator.messageReceived(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.MessageEvent) line: 145	
+	org.jboss.netty.handler.codec.http.HttpChunkAggregator(org.jboss.netty.channel.SimpleChannelUpstreamHandler).handleUpstream(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 70	
+	org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 564	
+	org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(org.jboss.netty.channel.ChannelEvent) line: 791	
+	org.elasticsearch.http.netty.ESHttpContentDecompressor(org.jboss.netty.handler.codec.http.HttpContentDecoder).messageReceived(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.MessageEvent) line: 108	
+	org.elasticsearch.http.netty.ESHttpContentDecompressor(org.jboss.netty.channel.SimpleChannelUpstreamHandler).handleUpstream(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 70	
+	org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 564	
+	org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(org.jboss.netty.channel.ChannelEvent) line: 791	
+	org.jboss.netty.channel.Channels.fireMessageReceived(org.jboss.netty.channel.ChannelHandlerContext, java.lang.Object, java.net.SocketAddress) line: 296	
+	org.jboss.netty.handler.codec.http.HttpRequestDecoder(org.jboss.netty.handler.codec.frame.FrameDecoder).unfoldAndFireMessageReceived(org.jboss.netty.channel.ChannelHandlerContext, java.net.SocketAddress, java.lang.Object) line: 459	
+	org.jboss.netty.handler.codec.http.HttpRequestDecoder(org.jboss.netty.handler.codec.replay.ReplayingDecoder<T>).callDecode(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.Channel, org.jboss.netty.buffer.ChannelBuffer, org.jboss.netty.buffer.ChannelBuffer, java.net.SocketAddress) line: 536	
+	org.jboss.netty.handler.codec.http.HttpRequestDecoder(org.jboss.netty.handler.codec.replay.ReplayingDecoder<T>).messageReceived(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.MessageEvent) line: 435	
+	org.jboss.netty.handler.codec.http.HttpRequestDecoder(org.jboss.netty.channel.SimpleChannelUpstreamHandler).handleUpstream(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 70	
+	org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 564	
+	org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext.sendUpstream(org.jboss.netty.channel.ChannelEvent) line: 791	
+	org.elasticsearch.common.netty.OpenChannelsHandler.handleUpstream(org.jboss.netty.channel.ChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 75	
+	org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(org.jboss.netty.channel.DefaultChannelPipeline$DefaultChannelHandlerContext, org.jboss.netty.channel.ChannelEvent) line: 564	
+	org.jboss.netty.channel.DefaultChannelPipeline.sendUpstream(org.jboss.netty.channel.ChannelEvent) line: 559	
+	org.jboss.netty.channel.Channels.fireMessageReceived(org.jboss.netty.channel.Channel, java.lang.Object, java.net.SocketAddress) line: 268	
+	org.jboss.netty.channel.Channels.fireMessageReceived(org.jboss.netty.channel.Channel, java.lang.Object) line: 255	
+	org.jboss.netty.channel.socket.nio.NioWorker.read(java.nio.channels.SelectionKey) line: 88	
+	org.jboss.netty.channel.socket.nio.NioWorker(org.jboss.netty.channel.socket.nio.AbstractNioWorker).process(java.nio.channels.Selector) line: 108	
+	org.jboss.netty.channel.socket.nio.NioWorker(org.jboss.netty.channel.socket.nio.AbstractNioSelector).run() line: 337	
+	org.jboss.netty.channel.socket.nio.NioWorker(org.jboss.netty.channel.socket.nio.AbstractNioWorker).run() line: 89	
+	org.jboss.netty.channel.socket.nio.NioWorker.run() line: 178	
+	org.jboss.netty.util.ThreadRenamingRunnable.run() line: 108	
+	org.jboss.netty.util.internal.DeadLockProofWorker$1.run() line: 42	
+	java.util.concurrent.ThreadPoolExecutor.runWorker(java.util.concurrent.ThreadPoolExecutor$Worker) line: 1145	
+	java.util.concurrent.ThreadPoolExecutor$Worker.run() line: 615	
+	java.lang.Thread.run() line: 745	
+	
+	
+	
+	
+	
+	SearchQueryThenFetchAsyncAction
+	org.elasticsearch.search.action.SearchServiceTransportAction sendExecuteQuery
+	
+	org.elasticsearch.transport.TransportService
+org.elasticsearch.action.admin.indices.stats.TransportIndicesStatsAction.shardOperation(IndicesStatsRequest, ShardRouting)
+
+org.elasticsearch.action.support.broadcast.node.TransportBroadcastByNodeAction.BroadcastByNodeTransportRequestHandler.onShardOperation(NodeRequest, Object[], int, ShardRouting)
+		ShardOperationResult result = shardOperation(request.indicesLevelRequest, shardRouting);
+
+
+	org.elasticsearch.action.support.broadcast.node.TransportBroadcastByNodeAction$AsyncAction
+	
+	org.elasticsearch.action.support.PlainListenableActionFuture
+	
+	
+	TransportAction$1.onResponse(Response) line: 89	
+TransportAction$1.onResponse(Object) line: 85	
+SearchQueryThenFetchAsyncAction$2.doRun() line: 138	
+SearchQueryThenFetchAsyncAction$2(AbstractRunnable).run() line: 37	
+EsThreadPoolExecutor(ThreadPoolExecutor).runWorker(ThreadPoolExecutor$Worker) line: 1145	
+ThreadPoolExecutor$Worker.run() line: 615	
+Thread.run() line: 745	
+
+	
+	
+	org.elasticsearch.http.netty.NettyHttpChannel.sendResponse(RestResponse) 等结果过来
+	org.elasticsearch.search.controller.SearchPhaseController.merge(ScoreDoc[], AtomicArray<? extends QuerySearchResultProvider>, AtomicArray<? extends FetchSearchResultProvider>, HasContextAndHeaders)  合并结果 并且将index转换成真正的文字
+	
+	
+	
+	搜索结果待合并堆栈
+	Daemon Thread [elasticsearch[The Profile][search][T#5]] (Suspended (breakpoint at line 129 in SearchQueryThenFetchAsyncAction))	
+	SearchQueryThenFetchAsyncAction.finishHim() line: 129	
+	SearchQueryThenFetchAsyncAction.access$000(SearchQueryThenFetchAsyncAction) line: 44	
+	SearchQueryThenFetchAsyncAction$1.onResponse(FetchSearchResult) line: 100	
+	SearchQueryThenFetchAsyncAction$1.onResponse(Object) line: 94	
+	SearchServiceTransportAction$12(ActionListenerResponseHandler<Response>).handleResponse(Response) line: 41	
+	TransportService$DirectResponseChannel.processResponse(TransportResponseHandler, TransportResponse) line: 836	
+	TransportService$DirectResponseChannel.sendResponse(TransportResponse, TransportResponseOptions) line: 820	
+	TransportService$DirectResponseChannel.sendResponse(TransportResponse) line: 810	
+	RequestHandlerRegistry$TransportChannelWrapper(DelegatingTransportChannel).sendResponse(TransportResponse) line: 58	
+	RequestHandlerRegistry$TransportChannelWrapper.sendResponse(TransportResponse) line: 140	
+	SearchServiceTransportAction$FetchByIdTransportHandler<Request>.messageReceived(Request, TransportChannel) line: 409	
+	SearchServiceTransportAction$FetchByIdTransportHandler<Request>.messageReceived(TransportRequest, TransportChannel) line: 405	
+	SearchServiceTransportAction$FetchByIdTransportHandler<Request>(TransportRequestHandler<T>).messageReceived(T, TransportChannel, Task) line: 33	
+	RequestHandlerRegistry<Request>.processMessageReceived(Request, TransportChannel) line: 77	
+	TransportService$4.doRun() line: 376	
+	TransportService$4(AbstractRunnable).run() line: 37	
+	EsThreadPoolExecutor(ThreadPoolExecutor).runWorker(ThreadPoolExecutor$Worker) line: 1145	
+	ThreadPoolExecutor$Worker.run() line: 615	
+	Thread.run() line: 745	
+	
+	
+	SearchServiceTransportAction
+	SearchServiceTransportAction  sendExecuteFetch
+
+	
+	
