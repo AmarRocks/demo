@@ -24,7 +24,7 @@
 	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/lucene-analyzers-common-5.5.2.jar"/>
 	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/lucene-backward-codecs-5.5.2.jar"/>
-	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/lucene-core-5.5.2.jar"/>
+	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/lucene-core-5.5.2.jar" sourcepath="resource/lucene-core-5.5.2-sources.jar"/>
 	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/lucene-grouping-5.5.2.jar"/>
 	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/lucene-highlighter-5.5.2.jar"/>
 	<classpathentry kind="lib" path="elasticsearch-2.4.0/lib/lucene-join-5.5.2.jar"/>

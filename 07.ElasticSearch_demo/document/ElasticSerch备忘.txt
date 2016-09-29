@@ -163,6 +163,11 @@ SearchQueryThenFetchAsyncAction.sendExecuteFirstPhase(DiscoveryNode, ShardSearch
 
 "query.getClass()"	(org.apache.lucene.search.BooleanQuery) (id=6744)	
 
+"collector.getClass()"	(org.apache.lucene.search.TopScoreDocCollector$SimpleTopScoreDocCollector) (id=272)	
+"searcher.getClass()"	(org.elasticsearch.search.internal.ContextIndexSearcher) (id=6387)	
+
+
+
 
 
 
