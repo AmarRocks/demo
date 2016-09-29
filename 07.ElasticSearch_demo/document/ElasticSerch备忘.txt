@@ -143,6 +143,29 @@ Thread.run() line: 745
 	
 	SearchServiceTransportAction
 	SearchServiceTransportAction  sendExecuteFetch
+	
+	
+	
+	Thread.init(ThreadGroup, Runnable, String, long, AccessControlContext) line: 371	
+Thread.init(ThreadGroup, Runnable, String, long) line: 349	
+Thread.<init>(ThreadGroup, Runnable, String, long) line: 675	
+EsExecutors$EsThreadFactory.newThread(Runnable) line: 123	
+ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor, Runnable) line: 610	
+EsThreadPoolExecutor(ThreadPoolExecutor).addWorker(Runnable, boolean) line: 924	
+EsThreadPoolExecutor(ThreadPoolExecutor).execute(Runnable) line: 1360	
+EsThreadPoolExecutor.execute(Runnable) line: 85	
+TransportService.sendLocalRequest(long, String, TransportRequest) line: 372	
+TransportService.sendRequest(DiscoveryNode, String, TransportRequest, TransportRequestOptions, TransportResponseHandler<T>) line: 327	
+TransportService.sendRequest(DiscoveryNode, String, TransportRequest, TransportResponseHandler<T>) line: 299	
+SearchServiceTransportAction.sendExecuteQuery(DiscoveryNode, ShardSearchTransportRequest, ActionListener<QuerySearchResultProvider>) line: 142	
+SearchQueryThenFetchAsyncAction.sendExecuteFirstPhase(DiscoveryNode, ShardSearchTransportRequest, ActionListener<QuerySearchResultProvider>) line: 66	
+
+
+"query.getClass()"	(org.apache.lucene.search.BooleanQuery) (id=6744)	
+
+
+
+
 
 	
 	
