@@ -112,16 +112,16 @@ final class Security {
      * @param environment configuration for generating dynamic permissions
      * @param filterBadDefaults true if we should filter out bad java defaults in the system policy.
      */
-    static void configure(Environment environment, boolean filterBadDefaults) throws Exception {
+    static void configure(Environment environment, boolean filterBadDefaults) throws Exception {// 注释这个方法的实现 否则 trace log文件没有权限写入  我试着配置了几次policy都失败了 所以索性注释了
 
-        // enable security policy: union of template and environment-based paths, and possibly plugin permissions
-        Policy.setPolicy(new ESPolicy(createPermissions(environment), getPluginPermissions(environment), filterBadDefaults));
-
-        // enable security manager
-        System.setSecurityManager(new SecureSM());
-
-        // do some basic tests
-        selfTest();
+//        // enable security policy: union of template and environment-based paths, and possibly plugin permissions
+//        Policy.setPolicy(new ESPolicy(createPermissions(environment), getPluginPermissions(environment), filterBadDefaults));
+//
+//        // enable security manager
+//        System.setSecurityManager(new SecureSM());
+//
+//        // do some basic tests
+//        selfTest();
     }
 
     /**

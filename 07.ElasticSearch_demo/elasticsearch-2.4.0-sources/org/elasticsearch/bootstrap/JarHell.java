@@ -274,6 +274,11 @@ public class JarHell {
                 if (clazz.startsWith("org.apache.log4j")) {
                     return; // go figure, jar hell for what should be System.out.println...
                 }
+                
+                // add by chenxiaguang . trace agent jar has included asm
+                if (clazz.startsWith("org.objectweb.asm")) {
+                    return; // go figure, jar hell for what should be System.out.println...
+                }
                 if (clazz.equals("org.joda.time.base.BaseDateTime")) {
                     return; // apparently this is intentional... clean this up
                 }

@@ -27,4 +27,8 @@ ERROR: Could not find plugin descriptor 'plugin-descriptor.properties' in plugin
  
  有空细看下为什么
  
+ --
+ 抓trace日志
+ -javaagent:D:\600.self\05.code\04.java\TProfiler\tprofiler-0.2.jar  -Dorg.simonme.tracer.enableinit=true
+ 
  

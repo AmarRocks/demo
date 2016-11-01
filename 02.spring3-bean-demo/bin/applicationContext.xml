@@ -49,8 +49,8 @@
 	
 	<bean id="serviceA" class="org.simonme.srcstudy.spring3.demo.service.impl.ServiceAImpl">
 		<property name="field" value="field4AInstacne"/>
-		<property name="key1" value="${key1}"/>
-		<property name="key2" value="${key2}"/>
+<!-- 		<property name="key1" value="${key1}"/> -->
+<!-- 		<property name="key2" value="${key2}"/> -->
 	</bean>
 	
 	<bean id="serviceB" class="org.simonme.srcstudy.spring3.demo.service.impl.ServiceBImpl">

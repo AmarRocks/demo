@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="server/src/main/java"/>
-	<classpathentry kind="src" path="client/src/main/java"/>
 	<classpathentry kind="src" path="client/src/test/java"/>
 	<classpathentry kind="src" path="client/src/test/resources"/>
 	<classpathentry kind="src" path="server/src/test/java"/>
-	<classpathentry kind="src" path="server/src/main/resources"/>
 	<classpathentry kind="src" path="server/src/test/resources"/>
 	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="lib/dubbo_demo_provider.jar"/>
@@ -23,7 +20,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_71"/>
 	<classpathentry kind="lib" path="lib/org.springframework.aop-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.beans-3.0.5.RELEASE.jar" sourcepath="D:/004.work/811.fwk_refactor/03.code/150810_yiyisvn/01.code/trunk/05.opensource_jar_source_doc/spring-beans-3.0.5.RELEASE-sources.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.context-3.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.context-3.0.5.RELEASE.jar" sourcepath="D:/004.work/811.fwk_refactor/03.code/02.opensource/spring-context-3.0.5.RELEASE-sources.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.core-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.expression-3.0.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.test-3.0.5.RELEASE.jar"/>

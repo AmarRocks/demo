@@ -7,6 +7,8 @@
  */
 package org.simonme.srcstudy.spring3.demo.service;
 
+import java.io.IOException;
+
 import org.simonme.srcstudy.spring3.demo.service.impl.ServiceAImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,6 +37,15 @@ public class BeanAssemblyTest
         ServiceA serviceA = (ServiceA)applicationContext.getBean("serviceA", ServiceAImpl.class);
         System.out.println(serviceA);
         System.out.println(serviceA.queryA());
+        try
+        {
+            System.in.read();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
 }

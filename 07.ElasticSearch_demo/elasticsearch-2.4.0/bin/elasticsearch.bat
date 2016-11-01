@@ -1,4 +1,4 @@
-@echo off
+rem @echo off
 
 SETLOCAL enabledelayedexpansion
 TITLE Elasticsearch 2.4.0
@@ -44,6 +44,11 @@ IF ERRORLEVEL 1 (
 )
 
 rem 增加调试参数
-"%JAVA_HOME%\bin\java" %JAVA_OPTS% -Xdebug -Xrunjdwp:transport=dt_socket,address=8500,server=y,suspend=y  %ES_JAVA_OPTS% %ES_PARAMS% -cp "%ES_CLASSPATH%" "org.elasticsearch.bootstrap.Elasticsearch" start !newparams!
+"%JAVA_HOME%\bin\java" %JAVA_OPTS% -javaagent:D:\600.self\05.code\04.java\TProfiler\tprofiler-0.2.jar -Xdebug -Xrunjdwp:transport=dt_socket,address=8500,server=y,suspend=y  %ES_JAVA_OPTS% %ES_PARAMS% -cp "%ES_CLASSPATH%" "org.elasticsearch.bootstrap.Elasticsearch" start !newparams!
+
+rem "%JAVA_HOME%\bin\java" %JAVA_OPTS% -javaagent:D:\600.self\05.code\04.java\TProfiler\tprofiler-0.2.jar  -Dorg.simonme.tracer.enableinit=true  %ES_JAVA_OPTS% %ES_PARAMS% -cp "%ES_CLASSPATH%" "org.elasticsearch.bootstrap.Elasticsearch" start !newparams!
+
+rem "%JAVA_HOME%\bin\java" %JAVA_OPTS% %ES_JAVA_OPTS% %ES_PARAMS% -cp "%ES_CLASSPATH%" "org.elasticsearch.bootstrap.Elasticsearch" start !newparams!
+
 
 ENDLOCAL

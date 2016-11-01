@@ -93,4 +93,7 @@ grant {
 
   // needed by JDKESLoggerTests
   permission java.util.logging.LoggingPermission "control";
+  
+  // add by chenxiaguang on 2016 10 25
+  permission java.io.FilePermission "C:/Users/chen.simon/*", "read,write";
 };
