@@ -33,5 +33,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Target(METHOD)
 @Retention(RUNTIME)
-public @interface Provides {
+public @interface Provides {// 使用 参见  https://github.com/google/guice/wiki/ProvidesMethods
 }
