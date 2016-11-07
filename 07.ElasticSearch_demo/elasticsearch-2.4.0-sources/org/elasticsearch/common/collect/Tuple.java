@@ -22,7 +22,7 @@ package org.elasticsearch.common.collect;
 /**
  *
  */
-public class Tuple<V1, V2> {
+public class Tuple<V1, V2> {// 就是个pair 注意 v1 v2是final的
 
     public static <V1, V2> Tuple<V1, V2> tuple(V1 v1, V2 v2) {
         return new Tuple<>(v1, v2);

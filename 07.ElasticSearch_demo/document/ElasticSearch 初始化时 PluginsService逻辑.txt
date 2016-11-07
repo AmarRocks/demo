@@ -1,0 +1,25 @@
+es可以load多个Bundle
+一个Bundle可以有多个PluginInfo
+Bundle-->PluginInfo
+PluginInfo又分成 是否是jvm的，不是的话 就是SitePlugin
+
+
+加载bundle
+ClassLoader loader = URLClassLoader.newInstance(bundle.urls.toArray(new URL[0]), getClass().getClassLoader());
+
+
+然后reloadLuceneSPI，为什么？
+
+
+plugin有onModule(XXModule module)这样的约定
+如果需要在module启动时候触发逻辑 那么实现上述方法即可
+在PluginService中会称之为onModuleReferences
+
+
+做外部module 或者 外部 plugin管理的时候 值得学习
+
+查看其package下面
+还有PluginManager PluginManagerCliParser等类 猜测是用于命令行形式的管理
+
+命令的help说明是写在.help文件中的
+

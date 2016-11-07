@@ -1,0 +1,13 @@
+1. 如何线程安全的对AtomicLong设置值
+可以 参见 ChildMemoryCircuitBreaker.addEstimateBytesAndMaybeBreak(long, String) 131行到151行的写法
+do{
+// 取值并处理计算逻辑
+}while(!this.used.compareAndSet(currentUsed, newUsed))
+// this.used 是AtomicLong
+一旦设置值失败 则需要重新取值 重新处理计算逻辑 
+也就是要重新执行do block中的逻辑
+为什么要重新计算这个处理逻辑而不是先把值设置好 让他尝试塞多次直至塞成功？
+因为一旦塞值失败，就意味着AtomicLong值发生了变化，
+do里面的那段逻辑又是依赖原来的值的，所以要重新计算。
+
+

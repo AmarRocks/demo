@@ -1,0 +1,46 @@
+select distinct(method_name) from trace_log_elasticsearch_init_161024
+where method_name like '%Module%'
+
+1. CircuitBreakerModule // 防止资源占用超过设置上限 
+2. LicenseModule
+3. CollectorModule --Marvel
+4. ExporterModule --Marvel
+5. RendererModule --Marvel
+6. MarvelShieldModule --Marvel
+7. PluginsModule // 管理plugin的一个模块 参见  ElasticSearch 初始化时 PluginsService逻辑.txt
+8. SettingsModule // 处理配置信息用的  针对不同的配置文件做了多种loader实现
+9. NodeModule
+10. NetworkModule
+11. ScriptModule
+12. EnvironmentModule
+13. NodeEnvironmentModule
+14. ClusterNameModule
+15. ThreadPoolModule
+16. DiscoveryModule
+17. ClusterModule
+18. RestModule
+19. TransportModule
+20. HttpServerModule
+21. IndicesModule
+22. SearchModule
+23. ActionModule
+24. MonitorModule
+25. GatewayModule
+26. NodeClientModule
+27. ShapeModule
+28. PercolatorModule
+29. ResourceWatcherModule
+30. RepositoriesModule
+31. TribeModule
+32. ProviderMethodsModule  --internal
+33. IKIndicesAnalysisModule
+
+基本上涉及了所有的module
+
+1. CircuitBreakerModule 
+防止资源占用超过设置上限 
+主要服务CircuitBreakerService
+比如在HttpServer.internalDispatchRequest(RestRequest, RestChannel)
+做请求调度时  会检查http的content_length是否超出系统的内存处理能力了
+
+

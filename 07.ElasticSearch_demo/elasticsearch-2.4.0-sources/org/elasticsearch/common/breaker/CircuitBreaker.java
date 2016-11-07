@@ -68,12 +68,12 @@ public interface CircuitBreaker {
      * @param label string label describing the bytes being added
      * @return the number of "used" bytes for the circuit breaker
      */
-    double addEstimateBytesAndMaybeBreak(long bytes, String label) throws CircuitBreakingException;
+    double addEstimateBytesAndMaybeBreak(long bytes, String label) throws CircuitBreakingException; // 计数，且如果超限  则中断(trip 绊倒)
 
     /**
      * Adjust the circuit breaker without tripping
      */
-    long addWithoutBreaking(long bytes);
+    long addWithoutBreaking(long bytes);// 只计数  不中断
 
     /**
      * @return the currently used bytes the breaker is tracking
