@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- hibernate dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        
+        <!-- mssql dialect 
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        -->
+		<!-- JDBC connection properties (begin) ===
+			<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+			<property name="hibernate.connection.url">jdbc:hsqldb:mem:jbpm</property>
+			<property name="hibernate.connection.username">sa</property>
+			<property name="hibernate.connection.password"></property>
+			==== JDBC connection properties (end) -->
+			
+		<!-- JDBC connection properties db2 (begin) ======= JDBC connection properties (end) -->
+			<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+			<property name="hibernate.connection.url">jdbc:oracle:thin:@10.0.0.212:1521:ORCL</property>
+			<property name="hibernate.connection.username">COM</property>
+			<property name="hibernate.connection.password">COM</property>
+			
+        <!-- JDBC connection properties mssql (begin) ===
+		<property name="hibernate.connection.driver_class">
+			net.sourceforge.jtds.jdbc.Driver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:jtds:sqlserver://127.0.0.1:1433/jbpm
+		</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.password">123</property>
+        === JDBC connection properties (end) -->
+		<property name="hibernate.cache.provider_class">
+			org.hibernate.cache.HashtableCacheProvider
+		</property>
+       
+        
+		<!-- DataSource properties (begin) 
+			<property name="hibernate.connection.datasource">java:/JbpmDS</property>
+			DataSource properties (end) -->
+
+		<!-- JTA transaction properties (begin) ===
+			<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property>
+			<property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
+			==== JTA transaction properties (end) -->
+
+		<!-- JDBC transaction properties (begin) -->
+		<property name="hibernate.transaction.factory_class">
+			org.hibernate.transaction.JDBCTransactionFactory
+		</property>
+<!-- 		<property name="hbm2ddl.auto">create</property>更新数据库方式   -->
+<property name="show_sql">true</property>
+		
+<!-- 		<property name="hibernate.show_sql" value="true" />       -->
+<!--         <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+
+
+		
+		<mapping
+			resource="org/simonme/srcstudy/hibernate3/demo/token0issue/bean/Team.hbm.xml" />
+		<mapping
+			resource="org/simonme/srcstudy/hibernate3/demo/token0issue/bean/User.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>
