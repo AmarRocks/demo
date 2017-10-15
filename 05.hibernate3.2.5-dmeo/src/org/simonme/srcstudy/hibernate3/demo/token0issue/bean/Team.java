@@ -18,16 +18,18 @@ package org.simonme.srcstudy.hibernate3.demo.token0issue.bean;
  */
 public class Team
 {
-    private long id;
+    private Long id;
     
     private String teamName;
 
-    public long getId()
+   
+
+    public Long getId()
     {
         return id;
     }
 
-    public void setId(long id)
+    public void setId(Long id)
     {
         this.id = id;
     }

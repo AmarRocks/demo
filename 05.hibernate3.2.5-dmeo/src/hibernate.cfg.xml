@@ -22,9 +22,9 @@
 			
 		<!-- JDBC connection properties db2 (begin) ======= JDBC connection properties (end) -->
 			<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-			<property name="hibernate.connection.url">jdbc:oracle:thin:@10.0.0.212:1521:ORCL</property>
-			<property name="hibernate.connection.username">COM</property>
-			<property name="hibernate.connection.password">COM</property>
+			<property name="hibernate.connection.url">jdbc:oracle:thin:@10.0.0.52:1521:ORCL</property>
+			<property name="hibernate.connection.username">C##COM_CXG</property>
+			<property name="hibernate.connection.password">123456</property>
 			
         <!-- JDBC connection properties mssql (begin) ===
 		<property name="hibernate.connection.driver_class">
@@ -58,7 +58,7 @@
 <property name="show_sql">true</property>
 		
 <!-- 		<property name="hibernate.show_sql" value="true" />       -->
-<!--         <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+<!--         <property name="hibernate.hbm2ddl.auto" >create</property> -->
 
 
 		
